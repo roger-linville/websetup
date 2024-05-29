@@ -1,0 +1,64 @@
+<html>
+<head>
+    <title>Puzzle Game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../css/portfolio.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
+    <script>
+        var info = $('#puzzleinfo'), moves = 0;
+        var idsInOrder = [];
+        $('#puzzle').sortable();
+        $('#puzzle').disableSelection();
+        var idsInOrder = [];
+        $(function () {
+            if ($('#puzzleBox').width() < $('#puzzle').width()) {
+                $('#puzzleBox').hide();
+            }
+            else {
+                $('#puzzleBox').show();
+            }
+            $('#puzzle').sortable({
+                update: function (event, ui) {
+                    $("ul#puzzle li").each(function () { idsInOrder.push($(this).attr("id")) });
+                    if (idsInOrder.join('') !== "123456789") {
+                        idsInOrder = [];
+                        $('#puzzleinfo').html('You\'ve made ' + (++moves) + ' move' + (moves > 1 ? 's' : ''));
+                    }
+                    else {
+                        $('#puzzleinfo').html('You\'ve solved the puzzle in ' + moves + ' moves!').addClass('congrats');
+                    }
+                }
+            });
+            $('#puzzle').disableSelection();
+        });
+    </script>
+</head>
+<body>
+    <li><a href="../index.html">Home</a></li>
+    <div id="mainContent">
+        <div id="contentBox" style="text-align: center; padding: 10px;">
+            <div id="puzzleBox">
+                <p>
+                    This is a javascript puzzle game. Move the pictures to solve the puzzle
+                </p>
+                <ul id="puzzle">
+                    <li id="8" style="background-image: url('../Games/Puzzle/Images/valley_8.jpg'); width: 160px; height: 100px; background-repeat: no-repeat;"></li>
+                    <li id="4" style="background-image: url('../Games/Puzzle/Images/Valley_4.jpg'); width: 160px; height: 100px; background-repeat: no-repeat;"></li>
+                    <li id="9" style="background-image: url('../Games/Puzzle/Images/Valley_9.jpg'); width: 160px; height: 100px; background-repeat: no-repeat;"></li>
+                    <li id="2" style="background-image: url('../Games/Puzzle/Images/Valley_2.jpg'); width: 160px; height: 100px; background-repeat: no-repeat;"></li>
+                    <li id="6" style="background-image: url('../Games/Puzzle/Images/Valley_6.jpg'); width: 160px; height: 100px; background-repeat: no-repeat;"></li>
+                    <li id="1" style="background-image: url('../Games/Puzzle/Images/Valley_1.jpg'); width: 160px; height: 100px; background-repeat: no-repeat;"></li>
+                    <li id="7" style="background-image: url('../Games/Puzzle/Images/Valley_7.jpg'); width: 160px; height: 100px; background-repeat: no-repeat;"></li>
+                    <li id="5" style="background-image: url('../Games/Puzzle/Images/Valley_5.jpg'); width: 160px; height: 100px; background-repeat: no-repeat;"></li>
+                    <li id="3" style="background-image: url('../Games/Puzzle/Images/Valley_3.jpg'); width: 160px; height: 100px; background-repeat: no-repeat;"></li>
+                </ul>
+                <p style="clear: left; margin: 20px 100px 50px;">
+                    <span id="puzzleinfo" style="margin: 100px">(No move made yet)</span>
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
